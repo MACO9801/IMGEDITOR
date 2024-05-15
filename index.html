@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Character App</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <section class="p-5 bg-cover bg-center h-screen" style="background-image: url('./imgs/BG-demo.png');">
+        <div class="flex justify-center items-center h-screen gap-4">
+            <div class="card w-96 h-[600px] glass">
+                <figure><img id="characterImage" class="w-[600]" src="./imgs/image.png" alt="car!"/></figure>
+                <div class="card-body">
+                    <h2 class="card-title justify-center text-white">Defender # UNKNOWN</h2>
+                    <p class="text-center pb-5 text-white">Your Defender has been stylized!</p>
+                    <div class="card-actions justify-center">
+                        <button id="claimBtn" class="btn btn-primary w-24"> Claim</button>
+                    </div>
+                </div>
+            </div>
+            <div class="card w-96 h-[600px] glass">
+                <div class="card-body">
+                    <h2 class="card-title justify-center text-white pb-3">ITEMS</h2>
+                    <p class="text-justify pb-5 text-white">Here is a list of the current ITEMS your DEFENDER is carrying on their backpack, please select what do you want to equip.</p>
+                    
+                    <div class="flex justify-center items-center gap-4"> <!-- ITEMS -->
+                        <div>
+                            <p class="text-start items-center text-white">Gold Glasses</p>
+                        </div>
+                        <div>
+                            <button id="addBtn" class="btn btn-primary w-24"> Add</button>
+                        </div>
+                        <div>
+                            <button class="btn btn-error w-24"> Remove</button>
+                        </div>
+                    </div> <!-- END OF ITEMS -->
+                    <div class="flex justify-center items-center gap-4"> <!-- ITEMS -->
+                        <div>
+                            <p class="text-start items-center text-white">Gold Glasses</p>
+                        </div>
+                        <div>
+                            <button class="btn btn-primary w-24"> Add</button>
+                        </div>
+                        <div>
+                            <button class="btn btn-error w-24"> Remove</button>
+                        </div>
+                    </div> <!-- END OF ITEMS -->
+                    <div class="flex justify-center items-center gap-4"> <!-- ITEMS -->
+                        <div>
+                            <p class="text-start items-center text-white">Gold Glasses</p>
+                        </div>
+                        <div>
+                            <button class="btn btn-primary w-24"> Add</button>
+                        </div>
+                        <div>
+                            <button class="btn btn-error w-24"> Remove</button>
+                        </div>
+                    </div> <!-- END OF ITEMS -->
+                    <div class="flex justify-center items-center gap-4"> <!-- ITEMS -->
+                        <div>
+                            <p class="text-start items-center text-white">Gold Glasses</p>
+                        </div>
+                        <div>
+                            <button class="btn btn-primary w-24"> Add</button>
+                        </div>
+                        <div>
+                            <button class="btn btn-error w-24"> Remove</button>
+                        </div>
+                    </div> <!-- END OF ITEMS -->
+                    <div class="flex justify-center items-center gap-4"> <!-- ITEMS -->
+                        <div>
+                            <p class="text-start items-center text-white">Gold Glasses</p>
+                        </div>
+                        <div>
+                            <button class="btn btn-primary w-24"> Add</button>
+                        </div>
+                        <div>
+                            <button class="btn btn-error w-24"> Remove</button>
+                        </div>
+                    </div> <!-- END OF ITEMS -->
+                    <div class="flex justify-center items-center gap-4"> <!-- ITEMS -->
+                        <div>
+                            <p class="text-start items-center text-white">Gold Glasses</p>
+                        </div>
+                        <div>
+                            <button class="btn btn-primary w-24"> Add</button>
+                        </div>
+                        <div>
+                            <button class="btn btn-error w-24"> Remove</button>
+                        </div>
+                    </div> <!-- END OF ITEMS -->
+                    <div class="flex justify-center items-center gap-4"> <!-- FOOTER -->
+                        <div>
+                            <br>
+                            <p class="text-start items-center text-white">Super Space Defenders</p>
+                        </div>
+
+                    </div> <!-- END OF FOOTER -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        document.getElementById('addBtn').addEventListener('click', function() {
+            var canvas = document.createElement('canvas');
+            canvas.width = 600;
+            canvas.height = 600;
+            var ctx = canvas.getContext('2d');
+
+            var existingImage = new Image();
+            existingImage.crossOrigin = "Anonymous"; // Allow cross-origin access
+            existingImage.onload = function() {
+                ctx.drawImage(existingImage, 0, 0, 600, 600);
+
+                var newImage = new Image();
+                newImage.onload = function() {
+                    ctx.drawImage(newImage, 0, 0, 600, 600);
+                    document.getElementById('characterImage').src = canvas.toDataURL('image/png');
+                    document.getElementById('claimBtn').removeAttribute('disabled');
+                };
+                newImage.src = './imgs/s-o.png'; // Specify the correct path to your overlay image hosted on your server
+            };
+            existingImage.src = './imgs/image.png'; // Specify the correct URL for the original image hosted on the server
+        });
+
+        document.getElementById('claimBtn').addEventListener('click', function() {
+            var canvas = document.createElement('canvas');
+            canvas.width = 600;
+            canvas.height = 600;
+            var ctx = canvas.getContext('2d');
+
+            var existingImage = new Image();
+            existingImage.crossOrigin = "Anonymous"; // Allow cross-origin access
+            existingImage.onload = function() {
+                ctx.drawImage(existingImage, 0, 0, 600, 600);
+
+                var newImage = new Image();
+                newImage.onload = function() {
+                    ctx.drawImage(newImage, 0, 0, 600, 600);
+
+                    var link = document.createElement('a');
+                    link.download = 'fused_image.png';
+                    link.href = canvas.toDataURL('image/png').replace('image/png', 'image/octet-stream');
+                    link.click();
+                };
+                newImage.src = './imgs/s-o.png'; // Specify the correct path to your overlay image
+            };
+            existingImage.src = document.getElementById('characterImage').src; // Get the current image source
+        });
+    </script>
+</body>
+</html>
